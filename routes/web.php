@@ -20,5 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/prefectures', 'PrefectureController@index')->name('prefectures.index');
+
 Route::get('/stations', 'StationController@index')->name('stations.index');

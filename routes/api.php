@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+Route::post('/stamp/{station_id}', 'UserStationController@store')->where('station_id', '[0-9]+');
+
+// Route::get('/home', 'HomeController@index')->name('home');

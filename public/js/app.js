@@ -1983,6 +1983,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2042,12 +2044,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       selectedPrefecture: 0,
       selectedCity: 0,
-      selectedStation: 0
+      selectedStation: 0,
+      addedStations: []
     };
   },
   props: ["prefectures", "cities", "stations"],
@@ -2083,6 +2112,34 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return this.stations;
       }
+    },
+    newStations: function newStations() {
+      var _this = this;
+
+      return this.stations.filter(function (station) {
+        return _this.addedStations.includes(station.id);
+      }).map(function (station) {
+        var prefecture = _this.prefectures.filter(function (prefecture) {
+          return prefecture.id === station.prefecture_id;
+        })[0];
+
+        var city = _this.cities.filter(function (city) {
+          return city.id === station.city_id;
+        })[0];
+
+        return {
+          id: station.id,
+          p_kanji: prefecture.kanji,
+          p_kana: prefecture.kana,
+          p_romaji: prefecture.romaji,
+          c_kanji: city.kanji,
+          c_kana: city.kana,
+          c_romaji: city.romaji,
+          s_kanji: station.kanji,
+          s_kana: station.kana,
+          s_romaji: station.romaji
+        };
+      });
     }
   },
   methods: {
@@ -2092,6 +2149,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     resetStation: function resetStation() {
       this.selectedStation = 0;
+    },
+    submit: function submit(e) {
+      if (this.selectedStation > 0 && !this.addedStations.includes(this.selectedStation)) {
+        this.addedStations.push(this.selectedStation);
+      }
     }
   }
 });
@@ -37911,6 +37973,48 @@ var render = function() {
                   2
                 )
               ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.submit }
+              },
+              [_vm._v("Add Station")]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v("Stations to Add")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.newStations, function(station) {
+                  return _c("tr", { key: station.id }, [
+                    _c("td", { attrs: { scope: "row" } }, [
+                      _vm._v(_vm._s(station.id))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(station.p_kanji))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(station.c_kanji))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(station.s_kanji))])
+                  ])
+                }),
+                0
+              )
             ])
           ])
         ])
@@ -37918,7 +38022,22 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("id")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Prefecture")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("City")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Station")])
+    ])
+  }
+]
 render._withStripped = true
 
 

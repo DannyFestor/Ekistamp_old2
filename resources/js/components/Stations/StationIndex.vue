@@ -50,6 +50,31 @@
                 </select>
               </div>
             </form>
+            <button type="button" class="btn btn-primary" v-on:click="submit">Add Station</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">Stations to Add</div>
+          <div class="card-body">
+              <table class="table">
+                  <thead>
+                      <th scope="col">id</th>
+                      <th scope="col">Prefecture</th>
+                      <th scope="col">City</th>
+                      <th scope="col">Station</th>
+                  </thead>
+                  <tbody>
+                      <tr v-for="station in newStations" :key="station.id">
+                          <td scope="row">{{ station.id }}</td>
+                          <td>{{ station.p_kanji }}</td>
+                          <td>{{ station.c_kanji }}</td>
+                          <td>{{ station.s_kanji }}</td>
+                      </tr>
+                  </tbody>
+              </table>
           </div>
         </div>
       </div>
@@ -58,12 +83,15 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
       selectedPrefecture: 0,
       selectedCity: 0,
-      selectedStation: 0
+      selectedStation: 0,
+      addedStations: []
     };
   },
   props: ["prefectures", "cities", "stations"],
@@ -97,6 +125,30 @@ export default {
       } else {
         return this.stations;
       }
+    },
+    newStations: function() {
+      return this.stations
+        .filter(station => this.addedStations.includes(station.id))
+        .map(station => {
+          const prefecture = this.prefectures.filter(
+            prefecture => prefecture.id === station.prefecture_id
+          )[0];
+          const city = this.cities.filter(
+            city => city.id === station.city_id
+          )[0];
+          return {
+            id: station.id,
+            p_kanji: prefecture.kanji,
+            p_kana: prefecture.kana,
+            p_romaji: prefecture.romaji,
+            c_kanji: city.kanji,
+            c_kana: city.kana,
+            c_romaji: city.romaji,
+            s_kanji: station.kanji,
+            s_kana: station.kana,
+            s_romaji: station.romaji
+          };
+        });
     }
   },
   methods: {
@@ -106,6 +158,14 @@ export default {
     },
     resetStation: function() {
       this.selectedStation = 0;
+    },
+    submit: function(e) {
+      if (
+        this.selectedStation > 0 &&
+        !this.addedStations.includes(this.selectedStation)
+      ) {
+        this.addedStations.push(this.selectedStation);
+      }
     }
   }
 };
