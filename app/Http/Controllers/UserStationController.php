@@ -40,7 +40,25 @@ class UserStationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ro = array();
+        // error_log($request->user()->id);
+        // foreach($request->data as $data) {
+        //     error_log($data);
+        //     $userstation = new UserStation;
+        //     $userstation->user_id = $request->user()->id;
+        //     $userstation->station_id = $data;
+        //     error_log($userstation);
+        //     $userstation->save();
+        //     array_push($ro, $userstation);
+        // }
+        try {
+            $userstation = new UserStation;
+            $userstation->user_id = 1;
+            $userstation->station_id = 1;
+            $userstation->save();
+        } catch(\Exception $e) {
+            echo $e->getMessage();
+        }
         return $request;
     }
 
