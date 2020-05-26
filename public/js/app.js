@@ -1974,6 +1974,124 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Stations/StationIndex.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Stations/StationIndex.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      selectedPrefecture: 0,
+      selectedCity: 0,
+      selectedStation: 0
+    };
+  },
+  props: ["prefectures", "cities", "stations"],
+  mounted: function mounted() {},
+  computed: {
+    filteredCities: function filteredCities() {
+      var selectedIndex = Number(this.selectedPrefecture);
+
+      if (selectedIndex === 0 || selectedIndex > 47) {
+        return this.cities;
+      } else {
+        return this.cities.filter(function (city) {
+          return city.prefecture_id === selectedIndex;
+        });
+      }
+    },
+    filteredStations: function filteredStations() {
+      var selectedPrefecture = Number(this.selectedPrefecture);
+      var selectedCity = Number(this.selectedCity);
+
+      if (selectedPrefecture > 0 && selectedCity > 0) {
+        return this.stations.filter(function (station) {
+          return station.prefecture_id === selectedPrefecture && station.city_id === selectedCity;
+        });
+      } else if (selectedPrefecture > 0) {
+        return this.stations.filter(function (station) {
+          return station.prefecture_id === selectedPrefecture;
+        });
+      } else if (selectedCity > 0) {
+        return this.stations.filter(function (station) {
+          return station.city_id === selectedCity;
+        });
+      } else {
+        return this.stations;
+      }
+    }
+  },
+  watch: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -37588,11 +37706,217 @@ var render = function() {
                   _vm._l(_vm.prefectures, function(prefecture) {
                     return _c(
                       "option",
-                      { domProps: { value: prefecture.id } },
+                      {
+                        key: prefecture.id,
+                        domProps: { value: prefecture.id }
+                      },
                       [_vm._v(_vm._s(prefecture.kanji))]
                     )
                   }),
                   0
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Stations/StationIndex.vue?vue&type=template&id=5f5cc3da&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Stations/StationIndex.vue?vue&type=template&id=5f5cc3da& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v("Select Prefecture")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("form", [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
+                  _vm._v("Example multiple select")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedPrefecture,
+                        expression: "selectedPrefecture"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "exampleFormControlSelect1" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.selectedPrefecture = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("全国")]),
+                    _vm._v(" "),
+                    _vm._l(_vm.prefectures, function(prefecture) {
+                      return _c(
+                        "option",
+                        {
+                          key: prefecture.id,
+                          domProps: { value: prefecture.id }
+                        },
+                        [_vm._v(_vm._s(prefecture.kanji))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(
+                  "\n              " +
+                    _vm._s(_vm.selectedPrefecture) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
+                  _vm._v("Example multiple select")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedCity,
+                        expression: "selectedCity"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "exampleFormControlSelect1" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.selectedCity = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("全て")]),
+                    _vm._v(" "),
+                    _vm._l(_vm.filteredCities, function(city) {
+                      return _c(
+                        "option",
+                        { key: city.id, domProps: { value: city.id } },
+                        [_vm._v(_vm._s(city.kanji))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(
+                  "\n              " +
+                    _vm._s(_vm.selectedCity) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
+                  _vm._v("Example multiple select")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedStation,
+                        expression: "selectedStation"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "exampleFormControlSelect1" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.selectedStation = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("全て")]),
+                    _vm._v(" "),
+                    _vm._l(_vm.filteredStations, function(station) {
+                      return _c(
+                        "option",
+                        { key: station.id, domProps: { value: station.id } },
+                        [_vm._v(_vm._s(station.kanji))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(
+                  "\n              " +
+                    _vm._s(_vm.selectedStation) +
+                    "\n            "
                 )
               ])
             ])
@@ -49780,7 +50104,8 @@ module.exports = function(module) {
 
 var map = {
 	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",
-	"./components/Prefectures/PrefectureIndex.vue": "./resources/js/components/Prefectures/PrefectureIndex.vue"
+	"./components/Prefectures/PrefectureIndex.vue": "./resources/js/components/Prefectures/PrefectureIndex.vue",
+	"./components/Stations/StationIndex.vue": "./resources/js/components/Stations/StationIndex.vue"
 };
 
 
@@ -50024,6 +50349,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PrefectureIndex_vue_vue_type_template_id_5cf1c7b1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PrefectureIndex_vue_vue_type_template_id_5cf1c7b1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Stations/StationIndex.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Stations/StationIndex.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _StationIndex_vue_vue_type_template_id_5f5cc3da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StationIndex.vue?vue&type=template&id=5f5cc3da& */ "./resources/js/components/Stations/StationIndex.vue?vue&type=template&id=5f5cc3da&");
+/* harmony import */ var _StationIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StationIndex.vue?vue&type=script&lang=js& */ "./resources/js/components/Stations/StationIndex.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StationIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StationIndex_vue_vue_type_template_id_5f5cc3da___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StationIndex_vue_vue_type_template_id_5f5cc3da___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Stations/StationIndex.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Stations/StationIndex.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/Stations/StationIndex.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StationIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./StationIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Stations/StationIndex.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StationIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Stations/StationIndex.vue?vue&type=template&id=5f5cc3da&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/Stations/StationIndex.vue?vue&type=template&id=5f5cc3da& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StationIndex_vue_vue_type_template_id_5f5cc3da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./StationIndex.vue?vue&type=template&id=5f5cc3da& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Stations/StationIndex.vue?vue&type=template&id=5f5cc3da&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StationIndex_vue_vue_type_template_id_5f5cc3da___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StationIndex_vue_vue_type_template_id_5f5cc3da___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
