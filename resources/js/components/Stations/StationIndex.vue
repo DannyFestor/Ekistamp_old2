@@ -13,9 +13,9 @@
                   class="form-control"
                   id="exampleFormControlSelect1"
                   v-model="selectedPrefecture"
-                  v-on:change="resetCity"
+                    v-on:change="getCities"
                 >
-                  <option value="0">全国</option>
+                  <option value="0"></option>
                   <option
                     v-for="prefecture in prefectures"
                     :key="prefecture.id"
@@ -25,7 +25,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">City</label>
-                <select class="form-control" id="exampleFormControlSelect1" v-model="selectedCity">
+                <select class="form-control" id="exampleFormControlSelect1" v-model="selectedCity" v-on:change="getStations">
                   <option value="0">全て</option>
                   <option
                     v-for="city in filteredCities"
@@ -85,6 +85,7 @@
 
 <script>
 import axios from "axios";
+const uri = "http://127.0.0.1:8000/"
 
 export default {
   data() {
@@ -92,11 +93,15 @@ export default {
       selectedPrefecture: 0,
       selectedCity: 0,
       selectedStation: 0,
-      addedStations: []
+      addedStations: [],
+      prefectures: [],
+      cities: [],
+      stations: []
     };
   },
-  props: ["prefectures", "cities", "stations"],
-  mounted() {},
+  mounted() {
+      this.getPrefectures()
+  },
   computed: {
     filteredCities: function() {
       const selectedIndex = Number(this.selectedPrefecture);
@@ -153,6 +158,41 @@ export default {
     }
   },
   methods: {
+    getPrefectures: function() {
+        if(this.prefectures.length === 0) {
+            axios.get(uri + "prefectures")
+            .then(response => {
+                if(response.status === 200) {
+                    this.prefectures = response.data;
+                }
+            })
+            .catch(error => {
+                console.error(error)
+            })
+        }
+    },
+    getCities: function() {
+        if(this.filteredCities.length === 0) {
+            axios.get(uri + 'prefectures/c/' + this.selectedPrefecture)
+            .then(response => {
+                this.cities = this.cities.concat(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        }
+    },
+    getStations: function() {
+        if(this.filteredStations.length === 0) {
+            axios.get(uri + 'cities/s/' + this.selectedCity)
+            .then(response => {
+                this.stations = this.stations.concat(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        }
+    },
     resetCity: function() {
       this.selectedCity = 0;
       this.resetStation();

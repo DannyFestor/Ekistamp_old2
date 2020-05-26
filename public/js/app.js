@@ -2071,17 +2071,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+var uri = "http://127.0.0.1:8000/";
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       selectedPrefecture: 0,
       selectedCity: 0,
       selectedStation: 0,
-      addedStations: []
+      addedStations: [],
+      prefectures: [],
+      cities: [],
+      stations: []
     };
   },
-  props: ["prefectures", "cities", "stations"],
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.getPrefectures();
+  },
   computed: {
     filteredCities: function filteredCities() {
       var selectedIndex = Number(this.selectedPrefecture);
@@ -2144,6 +2149,41 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    getPrefectures: function getPrefectures() {
+      var _this2 = this;
+
+      if (this.prefectures.length === 0) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(uri + "prefectures").then(function (response) {
+          if (response.status === 200) {
+            _this2.prefectures = response.data;
+          }
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      }
+    },
+    getCities: function getCities() {
+      var _this3 = this;
+
+      if (this.filteredCities.length === 0) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(uri + 'prefectures/c/' + this.selectedPrefecture).then(function (response) {
+          _this3.cities = _this3.cities.concat(response.data);
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      }
+    },
+    getStations: function getStations() {
+      var _this4 = this;
+
+      if (this.filteredStations.length === 0) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(uri + 'cities/s/' + this.selectedCity).then(function (response) {
+          _this4.stations = _this4.stations.concat(response.data);
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      }
+    },
     resetCity: function resetCity() {
       this.selectedCity = 0;
       this.resetStation();
@@ -37862,12 +37902,12 @@ var render = function() {
                             ? $$selectedVal
                             : $$selectedVal[0]
                         },
-                        _vm.resetCity
+                        _vm.getCities
                       ]
                     }
                   },
                   [
-                    _c("option", { attrs: { value: "0" } }, [_vm._v("全国")]),
+                    _c("option", { attrs: { value: "0" } }),
                     _vm._v(" "),
                     _vm._l(_vm.prefectures, function(prefecture) {
                       return _c(
@@ -37903,19 +37943,22 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: { id: "exampleFormControlSelect1" },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.selectedCity = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.selectedCity = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
+                        _vm.getStations
+                      ]
                     }
                   },
                   [
@@ -50570,8 +50613,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/danny/git/ekistamp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/danny/git/ekistamp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/danny/git/Ekistamp/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/danny/git/Ekistamp/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

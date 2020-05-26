@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\UserStation;
 use Illuminate\Http\Request;
 
@@ -41,25 +42,27 @@ class UserStationController extends Controller
     public function store(Request $request)
     {
         $ro = array();
-        // error_log($request->user()->id);
-        // foreach($request->data as $data) {
-        //     error_log($data);
-        //     $userstation = new UserStation;
-        //     $userstation->user_id = $request->user()->id;
-        //     $userstation->station_id = $data;
-        //     error_log($userstation);
-        //     $userstation->save();
-        //     array_push($ro, $userstation);
-        // }
         try {
-            $userstation = new UserStation;
-            $userstation->user_id = 1;
-            $userstation->station_id = 1;
-            $userstation->save();
+            foreach($request->data as $data) {
+                // Check if Entry already exists (where)
+                // If not (firstOr), make new entry
+                $target = UserStation::where([
+                        ['user_id', '=', $request->user()->id],
+                        ['station_id', '=', $data]
+                    ])
+                    ->firstOr(function() use ($request, $data) {
+                        $userstation = new UserStation;
+                        $userstation->user_id = $request->user()->id;
+                        $userstation->station_id = $data;
+                        $userstation->save();
+                        return $userstation;
+                    });
+                array_push($ro, $target);
+                }
         } catch(\Exception $e) {
             echo $e->getMessage();
         }
-        return $request;
+        return $ro;
     }
 
     /**

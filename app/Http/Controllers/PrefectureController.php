@@ -26,6 +26,17 @@ class PrefectureController extends Controller
     public function index()
     {
         $prefectures = Prefecture::all();
-        return view('prefectures.index')->with('prefectures', $prefectures);
+        return $prefectures;
+    }
+
+    public function cities(Request $request)
+    {
+        error_log($request->id);
+        try {
+            $cities = Prefecture::find($request->id)->cities;
+            return $cities;
+        } catch(\Exception $e) {
+            error_log($e);
+        }
     }
 }

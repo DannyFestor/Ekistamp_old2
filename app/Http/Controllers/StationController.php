@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Prefecture;
-use App\City;
 use App\Station;
 
 class StationController extends Controller
@@ -27,12 +25,7 @@ class StationController extends Controller
      */
     public function index()
     {
-        $prefectures = Prefecture::all();
-        $cities = City::all();
         $stations = Station::all();
-        return view('stations.index')
-        ->with('prefectures', $prefectures,)
-        ->with('cities', $cities)
-        ->with('stations', $stations);
+        return $stations;
     }
 }

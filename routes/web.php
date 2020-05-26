@@ -22,6 +22,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/prefectures', 'PrefectureController@index')->name('prefectures.index');
-
+Route::get('/prefectures/c/{id}', 'PrefectureController@cities')->where('id', '[0-9]+')->name("prefectures.cities");
+Route::get('/cities', 'CityController@index')->name('cities.index');
+Route::get('/cities/s/{id}', 'CityController@stations')->where('id', '[0-9]+')->name('cities.stations');
 Route::get('/stations', 'StationController@index')->name('stations.index');
+
 Route::post('/us', 'UserStationController@store')->name('stations.index');
