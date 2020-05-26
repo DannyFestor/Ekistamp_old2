@@ -13,7 +13,7 @@ class CreateUserStationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_station', function (Blueprint $table) {
+        Schema::create('user_stations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->integer('user_id');
@@ -30,6 +30,6 @@ class CreateUserStationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_station');
+        Schema::dropIfExists('user_stations');
     }
 }

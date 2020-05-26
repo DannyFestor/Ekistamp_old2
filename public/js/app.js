@@ -2069,6 +2069,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2150,10 +2151,17 @@ __webpack_require__.r(__webpack_exports__);
     resetStation: function resetStation() {
       this.selectedStation = 0;
     },
-    submit: function submit(e) {
+    addStation: function addStation(e) {
       if (this.selectedStation > 0 && !this.addedStations.includes(this.selectedStation)) {
         this.addedStations.push(this.selectedStation);
       }
+    },
+    submit: function submit() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/us", {
+        data: this.addedStations
+      }).then(function (response) {
+        console.log(response);
+      });
     }
   }
 });
@@ -37980,7 +37988,7 @@ var render = function() {
               {
                 staticClass: "btn btn-primary",
                 attrs: { type: "button" },
-                on: { click: _vm.submit }
+                on: { click: _vm.addStation }
               },
               [_vm._v("Add Station")]
             )
@@ -38015,7 +38023,17 @@ var render = function() {
                 }),
                 0
               )
-            ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.submit }
+              },
+              [_vm._v("Add Station")]
+            )
           ])
         ])
       ])

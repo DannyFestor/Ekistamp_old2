@@ -50,7 +50,7 @@
                 </select>
               </div>
             </form>
-            <button type="button" class="btn btn-primary" v-on:click="submit">Add Station</button>
+            <button type="button" class="btn btn-primary" v-on:click="addStation">Add Station</button>
           </div>
         </div>
       </div>
@@ -59,22 +59,23 @@
         <div class="card">
           <div class="card-header">Stations to Add</div>
           <div class="card-body">
-              <table class="table">
-                  <thead>
-                      <th scope="col">id</th>
-                      <th scope="col">Prefecture</th>
-                      <th scope="col">City</th>
-                      <th scope="col">Station</th>
-                  </thead>
-                  <tbody>
-                      <tr v-for="station in newStations" :key="station.id">
-                          <td scope="row">{{ station.id }}</td>
-                          <td>{{ station.p_kanji }}</td>
-                          <td>{{ station.c_kanji }}</td>
-                          <td>{{ station.s_kanji }}</td>
-                      </tr>
-                  </tbody>
-              </table>
+            <table class="table">
+              <thead>
+                <th scope="col">id</th>
+                <th scope="col">Prefecture</th>
+                <th scope="col">City</th>
+                <th scope="col">Station</th>
+              </thead>
+              <tbody>
+                <tr v-for="station in newStations" :key="station.id">
+                  <td scope="row">{{ station.id }}</td>
+                  <td>{{ station.p_kanji }}</td>
+                  <td>{{ station.c_kanji }}</td>
+                  <td>{{ station.s_kanji }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button type="button" class="btn btn-primary" v-on:click="submit">Add Station</button>
           </div>
         </div>
       </div>
@@ -159,13 +160,22 @@ export default {
     resetStation: function() {
       this.selectedStation = 0;
     },
-    submit: function(e) {
+    addStation: function(e) {
       if (
         this.selectedStation > 0 &&
         !this.addedStations.includes(this.selectedStation)
       ) {
         this.addedStations.push(this.selectedStation);
       }
+    },
+    submit: function() {
+        axios.post(
+            "/us",
+            {data: this.addedStations}
+        )
+        .then(response => {
+            console.log(response);
+        });
     }
   }
 };
