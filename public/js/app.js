@@ -2042,8 +2042,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2087,7 +2085,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  watch: {}
+  methods: {
+    resetCity: function resetCity() {
+      this.selectedCity = 0;
+      this.resetStation();
+    },
+    resetStation: function resetStation() {
+      this.selectedStation = 0;
+    }
+  }
 });
 
 /***/ }),
@@ -37749,15 +37755,13 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("Select Prefecture")
-          ]),
+          _c("div", { staticClass: "card-header" }, [_vm._v("Select Station")]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("form", [
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
-                  _vm._v("Example multiple select")
+                  _vm._v("Prefecture")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -37774,19 +37778,22 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: { id: "exampleFormControlSelect1" },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.selectedPrefecture = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.selectedPrefecture = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
+                        _vm.resetCity
+                      ]
                     }
                   },
                   [
@@ -37804,17 +37811,12 @@ var render = function() {
                     })
                   ],
                   2
-                ),
-                _vm._v(
-                  "\n              " +
-                    _vm._s(_vm.selectedPrefecture) +
-                    "\n            "
                 )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
-                  _vm._v("Example multiple select")
+                  _vm._v("City")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -37858,17 +37860,12 @@ var render = function() {
                     })
                   ],
                   2
-                ),
-                _vm._v(
-                  "\n              " +
-                    _vm._s(_vm.selectedCity) +
-                    "\n            "
                 )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
-                  _vm._v("Example multiple select")
+                  _vm._v("Station")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -37912,11 +37909,6 @@ var render = function() {
                     })
                   ],
                   2
-                ),
-                _vm._v(
-                  "\n              " +
-                    _vm._s(_vm.selectedStation) +
-                    "\n            "
                 )
               ])
             ])

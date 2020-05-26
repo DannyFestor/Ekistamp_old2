@@ -3,16 +3,17 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Select Prefecture</div>
+          <div class="card-header">Select Station</div>
 
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Example multiple select</label>
+                <label for="exampleFormControlSelect1">Prefecture</label>
                 <select
                   class="form-control"
                   id="exampleFormControlSelect1"
                   v-model="selectedPrefecture"
+                  v-on:change="resetCity"
                 >
                   <option value="0">全国</option>
                   <option
@@ -21,10 +22,9 @@
                     :value="prefecture.id"
                   >{{ prefecture.kanji }}</option>
                 </select>
-                {{ selectedPrefecture }}
               </div>
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Example multiple select</label>
+                <label for="exampleFormControlSelect1">City</label>
                 <select class="form-control" id="exampleFormControlSelect1" v-model="selectedCity">
                   <option value="0">全て</option>
                   <option
@@ -33,10 +33,9 @@
                     :value="city.id"
                   >{{ city.kanji }}</option>
                 </select>
-                {{ selectedCity }}
               </div>
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Example multiple select</label>
+                <label for="exampleFormControlSelect1">Station</label>
                 <select
                   class="form-control"
                   id="exampleFormControlSelect1"
@@ -49,7 +48,6 @@
                     :value="station.id"
                   >{{ station.kanji }}</option>
                 </select>
-                {{ selectedStation }}
               </div>
             </form>
           </div>
@@ -89,14 +87,26 @@ export default {
             station.city_id === selectedCity
         );
       } else if (selectedPrefecture > 0) {
-          return this.stations.filter(station => station.prefecture_id === selectedPrefecture)
+        return this.stations.filter(
+          station => station.prefecture_id === selectedPrefecture
+        );
       } else if (selectedCity > 0) {
-          return this.stations.filter(station => station.city_id === selectedCity)
+        return this.stations.filter(
+          station => station.city_id === selectedCity
+        );
       } else {
-          return this.stations
+        return this.stations;
       }
     }
   },
-  watch: {}
+  methods: {
+    resetCity: function() {
+      this.selectedCity = 0;
+      this.resetStation();
+    },
+    resetStation: function() {
+      this.selectedStation = 0;
+    }
+  }
 };
 </script>
