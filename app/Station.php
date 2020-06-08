@@ -13,6 +13,10 @@ class Station extends Model
         'kanji'
     ];
 
+    public function user() {
+        return $this->belongsToMany('App\User');
+    }
+
     public function prefecture() {
         return $this->belongsTo('App\Prefecture');
     }

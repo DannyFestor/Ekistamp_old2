@@ -37,7 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function stamps() {
-        return $this->hasManyThrough('App\Station', 'App\UserStation');
+    public function stations() {
+        return $this->belongsToMany(Station::class);
     }
 }
